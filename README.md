@@ -18,6 +18,7 @@ C6-D#6 : LDUR ch.1
 
 multi keys support: D#5-B5, D#6-B6. to setup in config.json's "key_count"
 
+This tool use only midi channel 0.
 
 By the way, the "mustHitSection" inversion process is done internally, so on the DAW, you should make notes exactly as you see notes in game.
 It's more intuitive and the editor in FNF has that specification.
@@ -26,7 +27,11 @@ It's more intuitive and the editor in FNF has that specification.
 I converted FNF2MIDI2FNF2MIDI twice, but it's the same content, so it should work.
 
 
+
+
+
 にほんご
+
 # MIDI2FNFKai
 Friday Night Funkin'のソングチャートのMIDIファイルまたはJSONファイルをドラッグ＆ドロップしてください。
 
