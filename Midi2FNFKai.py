@@ -225,7 +225,9 @@ if __name__ == '__main__':
                     
                     currTime = globalTime*tick_duration*1000
                     noteToUse = 0
-                    if (message.channel == 0): #only use channel 0
+                    midich = message.channel
+                    # チャンネル番号はノーツ、壁、弾など種別を表す
+                    if (midich >= 0) and (midich <= 16):
                         print(message, "-> ", noteToUse)
                         if (message.note >= 60 and message.note <= 71):
                             noteToUse = message.note-60
@@ -234,22 +236,22 @@ if __name__ == '__main__':
                         else:
                             # special command
                             noteToUse = message.note 
-                                
-                    aux = [currTime,noteToUse,0] 
+                            
+                    aux = [currTime,noteToUse,0, midich] 
                     #print(aux)
-                    nyxTracks[message.channel] += [aux]
-                    noteState[str(message.note)] = len(nyxTracks[message.channel])-1
+                    nyxTracks[0] += [aux]
+                    noteState[str(message.note)] = len(nyxTracks[0])-1
                 
                 elif (message.type == "note_off"):
                     # long notes detection
 
                     target_auxid = getNoteState(message.note)
-                    lastaux = nyxTracks[message.channel][target_auxid]
+                    lastaux = nyxTracks[0][target_auxid]
                     currTime = globalTime*tick_duration*1000 - 5
                     lastaux[2] = currTime - lastaux[0]
                     if msec_per_step > lastaux[2]:
                         lastaux[2] = 0
-                    nyxTracks[message.channel][target_auxid][2] = lastaux[2]
+                    nyxTracks[0][target_auxid][2] = lastaux[2]
                     del noteState[str(message.note)]
 
                     print(message, "| long:", msec_per_step, lastaux[2])
