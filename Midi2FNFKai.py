@@ -10,11 +10,12 @@ import sys
 
 DEFAULT_TEMPO = 0.5
 CONFIG_FILE = "config.json"
-DEFAULT_CONFIG ={
-                "section_keyswitch": [{"note": 85, "set_attr": "mustHitSection", "1": True, "0": False }],
-                "mustHitSectionNote": 85,
-               "chartFormat": "Kade Engine", 
-               "midi2fnf key_count": 4} 
+DEFAULT_CONFIG = {
+    "section_keyswitch": [{"note": 85, "set_attr": "mustHitSection", "1": True, "0": False }],
+    "mustHitSectionNote": 85,
+    "chartFormat": "Kade Engine", 
+    "midi2fnf key_count": 4
+}
 
 def loadconfig():
     try:
@@ -73,7 +74,9 @@ songName = filename
 print("processing: ", fileext)
 
 if __name__ == '__main__':
-     # fnf 2 midi---------------------------------------
+#---------------------------------------
+# fnf 2 midi
+#
     if ".json" == fileext:
         # JSONファイルの読み込みと辞書への変換
         with open(path, "r") as file:
@@ -155,8 +158,9 @@ if __name__ == '__main__':
         mid.save(songName+".mid")
         sys.exit()
 
-
-    # midi 2 fnf------------------------------------------------------------
+#------------------------------------------------------------
+# midi 2 fnf
+#
     bpm = float(enterbox("BPM of Midi", "Enter BPM", 120))
     key_count = CONF["midi2fnf key_count"]
 
