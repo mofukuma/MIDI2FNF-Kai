@@ -274,6 +274,7 @@ if __name__ == '__main__':
             for note in list(nyxTracks[j]):
                 roundedNote = round_decimals_up(note[0],3)
                 if roundedNote + tolerance < currTime*1000:
+
                     # check special command
                     special_f = False
                     for i, v in enumerate(CONF["section_keyswitch"]):
@@ -287,7 +288,8 @@ if __name__ == '__main__':
 
                     # normal notes
                     if special_f == False:
-                        aux+=[ [roundedNote,note[1],note[2]] ]
+                        aux+=[ [roundedNote,note[1],note[2], note[3]] ]
+
                     nyxTracks[j].remove(note)
                     
             #for note in list(nyxTracks[1]):
