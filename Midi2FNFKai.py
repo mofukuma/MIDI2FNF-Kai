@@ -206,29 +206,32 @@ if __name__ == '__main__':
         #print("Track: " + str(i))
         globalTime = 0
 
+        changetempo = []
+
         for message in track:
             t = ticks2s(message.time, tempo, mid.ticks_per_beat)
             totaltime += t
 
             if isinstance(message, MetaMessage):  # Tempo change
                 if message.type == "set_tempo":
-                    tempo = message.tempo / 10**6
+                    ctempo = message.tempo / 10**6
+                    changetempo.append([message.time, ctempo])
+                    print("**************set_tempo:" + str(ctempo))
                 elif message.type == "end_of_track":
                     pass
                 else:
                     print("Unsupported metamessage: " + str(message))
 
             else:  # Note
-                
                 globalTime+= message.time
+                
                 if (message.type == "note_on"):
-                    
                     currTime = globalTime*tick_duration*1000
                     noteToUse = 0
                     midich = message.channel
                     # チャンネル番号はノーツ、壁、弾など種別を表す
                     if (midich >= 0) and (midich <= 16):
-                        print(message, "-> ", noteToUse)
+                        #print(message, "-> ", noteToUse)
                         if (message.note >= 60 and message.note <= 71):
                             noteToUse = message.note-60
                         elif (message.note >= 72 and message.note <= 83):
@@ -254,7 +257,7 @@ if __name__ == '__main__':
                     nyxTracks[0][target_auxid][2] = lastaux[2]
                     del noteState[str(message.note)]
 
-                    print(message, "| long:", msec_per_step, lastaux[2])
+                    #print(message, "| long:", msec_per_step, lastaux[2])
 
         print("totaltime: " + str(totaltime)+"s")
 
